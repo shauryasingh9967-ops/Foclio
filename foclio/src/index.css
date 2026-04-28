@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ─────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --font-display: 'DM Sans', system-ui, sans-serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
+    --font-mono:    'DM Mono', monospace;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+  }
+
+  body {
+    background-color: #08090a;
+    color: #f0f0f0;
+    font-family: var(--font-body);
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::selection {
+    background: rgba(245, 166, 35, 0.2);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar       { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #252729; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #f5a623; }
+}
+
+/* ── Skeleton shimmer ───────────────────────────────────────────── */
+@layer components {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #161819 0px,
+      #1d1f21 200px,
+      #161819 400px
+    );
+    background-size: 500px 100%;
+    animation: shimmer 1.6s linear infinite;
+    border-radius: 6px;
+  }
+
+  /* Glass surface */
+  .glass {
+    background: rgba(15, 16, 17, 0.85);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Accent ring on focus */
+  .focus-accent:focus-visible {
+    outline: 2px solid #f5a623;
+    outline-offset: 2px;
+  }
+}
+
+/* ── Utility overrides ──────────────────────────────────────────── */
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #f5a623 0%, #f0971a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-subtle { border-color: rgba(255,255,255,0.06); }
+  .bg-surface-alt { background-color: rgba(22,24,25,0.7); }
+}
+
+/* ── YouTube iframe fix — removes black bars ────────────────────── */
+.yt-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.yt-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
